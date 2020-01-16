@@ -13,9 +13,9 @@ tsconfig.json
 
 startup global configuration injector
   main.ts - load assets/appConfig.json
+  AppConfigModel - configuration values class
   AppConfigService - holds the configuration values
   injectors.ts - injection token
-  AppConfigModel - configuration values class
   refs:
   https://medium.com/better-programming/how-to-handle-async-providers-in-angular-51884647366
   https://medium.com/better-programming/follow-up-how-to-handle-async-providers-in-angular-54957c7349c4
@@ -24,15 +24,13 @@ error handling
   global
     http
     client
-  http interceptor
-
-  refs:
-  https://medium.com/angular-in-depth/expecting-the-unexpected-best-practices-for-error-handling-in-angular-21c3662ef9e4
+    http interceptor
+    refs:
+    https://medium.com/angular-in-depth/expecting-the-unexpected-best-practices-for-error-handling-in-angular-21c3662ef9e4
 
 
   bootstrap
     npm install bootstrap --save
-
     angular.json -
       add to "styles"
       "./node_modules/bootstrap/dist/css/bootstrap.css",

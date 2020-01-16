@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GlobalErrorHandlingService } from '@services/global-error-handling.service';
+import { CoreModule } from '@core/core.module';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { GlobalErrorHandlingService } from '@services/global-error-handling.serv
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CoreModule,
     HttpClientModule
   ],
   providers: [

@@ -1,21 +1,24 @@
 import { AppConfigService } from '@services/app-config.service';
-import { Component } from '@angular/core';
-import { AppConfigModel } from '@shared/models/app-config-model';
+import { Component, OnInit } from '@angular/core';
+import { DataService } from '@services/data.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'angular-base-framework';
-  private appConfigModel: AppConfigModel;
-
-  constructor(private configSvc: AppConfigService) {
-    console.log(this.configSvc.configuration().baseUrl);
-  }
+  jsonFile: any;
+  constructor(private configSvc: AppConfigService, private dataSvc: DataService) { }
 
   throwLocalError() {
     throw new Error('dummy error!');
+  }
+
+  ngOnInit() {
+    this.dataSvc.getLocalJsonFile().subscribe( r => {
+      this.jsonFile = r;
+    });
   }
 }

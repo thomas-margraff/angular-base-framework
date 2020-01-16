@@ -15,4 +15,7 @@ export class LoggingService {
     console.error(error);
   }
 
+  logMessage(msg: string) {
+    console.log(msg);
+  }
 }
