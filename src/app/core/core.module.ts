@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CoreComponent } from './core.component';
 import { InterceptorProviders } from './interceptors/interceptors';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   imports: [
-    CommonModule
+    SharedModule
   ],
-  declarations: [CoreComponent],
+  declarations: [],
   providers: [
     InterceptorProviders
   ]

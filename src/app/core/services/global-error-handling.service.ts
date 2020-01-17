@@ -1,7 +1,9 @@
+import { ErrorService } from '@services/error.service';
 import { Injectable, Injector, ErrorHandler } from '@angular/core';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { LoggingService } from './logging.service';
+import { LoggingService } from '@services/logging.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { NotificationService } from '@services/notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,19 +12,32 @@ export class GlobalErrorHandlingService implements ErrorHandler {
 
   constructor(private injector: Injector) { }
 
-  handleError(error) {
+  handleError(error: Error | HttpErrorResponse) {
 
-    const loggingService = this.injector.get(LoggingService);
+    const errorService = this.injector.get(ErrorService);
+    const logger = this.injector.get(LoggingService);
+    const notifier = this.injector.get(NotificationService);
 
     const location = this.injector.get(LocationStrategy);
     const url = location instanceof PathLocationStrategy ? location.path() : '';
 
-    const message = error.message ? error.message : error.toString();
+    // const message = error.message ? error.message : error.toString();
+    let message = '';
+    let stackTrace = '';
 
     if (error instanceof HttpErrorResponse) {
-      loggingService.logHttpResonseError(error);
+      // Server Error
+      message = errorService.getServerMessage(error);
+      stackTrace = errorService.getServerStack(error);
+      // doesnt show on page ???
+      // notifier.showError(message);
     } else {
-      loggingService.logClientError(error.message);
+      // Client Error
+      message = errorService.getClientMessage(error);
+      stackTrace = errorService.getClientStack(error);
+      notifier.showError(message);
     }
+    logger.logError(message, stackTrace);
+    console.error(error);
   }
 }

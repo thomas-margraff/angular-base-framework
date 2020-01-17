@@ -1,3 +1,4 @@
 {
+  "logHttpEvent": false,
   "baseUrl": "assets/db-data-week.json"
 }

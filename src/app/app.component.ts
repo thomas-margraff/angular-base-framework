@@ -12,13 +12,19 @@ export class AppComponent implements OnInit {
   jsonFile: any;
   constructor(private configSvc: AppConfigService, private dataSvc: DataService) { }
 
+  ngOnInit() {
+  }
+
   throwLocalError() {
     throw new Error('dummy error!');
   }
 
-  ngOnInit() {
+  throwServerError() {
     this.dataSvc.getLocalJsonFile().subscribe( r => {
       this.jsonFile = r;
     });
+
   }
+
+
 }

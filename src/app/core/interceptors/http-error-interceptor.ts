@@ -1,3 +1,5 @@
+import { ErrorService } from '@services/error.service';
+import { NotificationService } from '@services/notification.service';
 import { Injectable } from '@angular/core';
 import {
   HttpEvent,
@@ -11,21 +13,24 @@ import {
  import { Observable, throwError } from 'rxjs';
  import { catchError, retry, tap, finalize } from 'rxjs/operators';
  import { LoggingService } from '@services/logging.service';
+ import { AppConfigService } from '@services/app-config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpErrorInterceptor implements HttpInterceptor {
 
-  constructor(private logService: LoggingService) {}
+  constructor(private logService: LoggingService,
+              private appConfig: AppConfigService,
+              private errorService: ErrorService,
+              private notify: NotificationService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
     return next.handle(request)
       .pipe(
         tap(
-          (event: HttpEvent<any>) => {
-            if (event instanceof HttpResponse) {
+          (event: HttpEvent<HttpEventType>) => {
+            if (event instanceof HttpResponse && this.appConfig.configuration().logHttpEvent === true) {
               const eventInfo = {
                 status: event.status,
                 statusText: event.statusText,
@@ -37,21 +42,16 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             }
           },
         ),
+        retry(1),
         catchError((error: HttpErrorResponse) => {
-          let errorMessage = '';
-
-          // client-side error
-          if (error.error instanceof ErrorEvent) {
-            errorMessage = `Error: ${error.error.message}`;
-          }
-
-          // server-side error
           if (error instanceof HttpErrorResponse) {
             if (error.status === 401) {
               // refresh token
             }
-            errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-            return throwError(error);        }
+            const message = this.errorService.getServerMessage(error);
+            this.notify.showError(message);
+            return throwError(error);
+          }
         }), finalize(() => {
           // turn spinner off - etc
       })
