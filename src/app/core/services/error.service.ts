@@ -36,7 +36,7 @@ export class ErrorService {
 
         // replace all keys with their values
         Object.keys(map).forEach(key => {
-            msg = msg.replace(new RegExp(`{${key}}`, 'g'), map[key])
+            msg = msg.replace(new RegExp(`{${key}}`, 'g'), map[key]);
         });
 
         return msg;
