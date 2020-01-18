@@ -1,21 +1,38 @@
-import { SharedModule } from '@shared/shared.module';
-import { BrowserModule } from '@angular/platform-browser';
+// angular
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { GlobalErrorHandlingService } from '@services/global-error-handling.service';
+
+// feature modules
 import { CoreModule } from '@core/core.module';
+import { SharedModule } from '@shared/shared.module';
+import { Feature1Module } from './feature1/feature1.module';
+
+// routing
+import { AppRoutingModule } from './app-routing.module';
+
+// 3rd party modules
 import { ToastrModule } from 'ngx-toastr';
+
+// services
+import { GlobalErrorHandlingService } from '@services/global-error-handling.service';
+
+// components
+import { AppComponent } from './app.component';
+import { HeaderComponent } from './root-components/header/header.component';
+import { HomeComponent } from './root-components/home/home.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    Feature1Module,
     AppRoutingModule,
     CoreModule,
     SharedModule,
