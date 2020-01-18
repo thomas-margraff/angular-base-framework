@@ -48,7 +48,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             if (error.status === 401) {
               // refresh token
             }
-            const message = this.errorService.getServerMessage(error);
+            const message = this.errorService.getServerMessage(request, error);
             this.notify.showError(message);
             return throwError(error);
           }
@@ -57,4 +57,5 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       })
     );
   }
+
 }

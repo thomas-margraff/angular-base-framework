@@ -7,7 +7,7 @@ import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   { path: 'featureone', children: [
-      { path: '', component: HomeComponent },
+      { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: 'list', component: ListComponent },
       { path: 'create', component: CreateComponent },
     ]

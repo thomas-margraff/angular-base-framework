@@ -12,4 +12,9 @@ constructor(private http: HttpClient, private config: AppConfigService) { }
   getLocalJsonFile() {
     return this.http.get(this.config.configuration().baseUrl);
   }
+
+  getBadUrl() {
+    return this.http.get(this.config.configuration().badUrl);
+  }
+
 }

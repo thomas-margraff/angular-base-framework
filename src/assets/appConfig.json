@@ -1,4 +1,5 @@
 {
   "logHttpEvent": false,
-  "baseUrl": "assets/db-data-week.json"
+  "baseUrl": "assets/db-data-week.json",
+  "badUrl": "assets/db-data-week1.json"
 }

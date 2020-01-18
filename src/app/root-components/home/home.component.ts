@@ -17,12 +17,18 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  getLocalData() {
+    this.dataSvc.getLocalJsonFile().subscribe( r => {
+      this.jsonFile = r;
+    });
+  }
+
   throwLocalError() {
     throw new Error('dummy error!');
   }
 
   throwServerError() {
-    this.dataSvc.getLocalJsonFile().subscribe( r => {
+    this.dataSvc.getBadUrl().subscribe( r => {
       this.jsonFile = r;
     });
   }

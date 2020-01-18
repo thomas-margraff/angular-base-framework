@@ -13,6 +13,10 @@ export class ListComponent implements OnInit {
   ngOnInit() {
   }
 
+  showCreate() {
+    this.router.navigate(['featureone/create']);
+  }
+
   back() {
     this.router.navigate(['featureone/']);
   }
