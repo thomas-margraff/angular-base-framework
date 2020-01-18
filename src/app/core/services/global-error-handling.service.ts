@@ -26,9 +26,9 @@ export class GlobalErrorHandlingService implements ErrorHandler {
     let stackTrace = '';
 
     if (error instanceof HttpErrorResponse) {
-      // Server Error
-      message = errorService.getServerMessage(error);
-      stackTrace = errorService.getServerStack(error);
+      // Server Error - handled in interceptor
+      // message = errorService.getServerMessage(request, error);
+      // stackTrace = errorService.getServerStack(error);
       // doesnt show on page ???
       // notifier.showError(message);
     } else {
