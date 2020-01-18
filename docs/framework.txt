@@ -1,7 +1,7 @@
 configuration
 errorhandling
 notifications
-
+feature modules
 
 tsconfig.json
   path aliases
