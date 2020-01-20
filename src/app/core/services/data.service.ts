@@ -17,4 +17,7 @@ constructor(private http: HttpClient, private config: AppConfigService) { }
     return this.http.get(this.config.configuration().badUrl);
   }
 
+  getAllUsers() {
+    return this.http.get<any>(this.config.configuration().getAllUsersUrl);
+  }
 }

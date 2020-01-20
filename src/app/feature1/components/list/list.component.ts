@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataService } from '@services/data.service';
 
 @Component({
   selector: 'app-list',
@@ -7,10 +8,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-
-  constructor(private router: Router) { }
+  users: any = [];
+  constructor(private router: Router, private dataSvc: DataService) { }
 
   ngOnInit() {
+    this.dataSvc.getAllUsers().subscribe(r => {
+      this.users = r;
+    },
+    error => {
+      console.log(error);
+    });
   }
 
   showCreate() {

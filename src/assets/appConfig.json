@@ -1,5 +1,7 @@
 {
   "logHttpEvent": false,
   "baseUrl": "assets/db-data-week.json",
-  "badUrl": "assets/db-data-week1.json"
+  "badUrl": "assets/db-data-week1.json",
+  "authUrl": "http://localhost:4000/users/authenticate",
+  "getAllUsersUrl":  "http://localhost:4000/users/getall"
 }

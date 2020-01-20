@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { CreateComponent } from './components/create/create.component';
 import { ListComponent } from './components/list/list.component';
-import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   { path: 'featureone', children: [
@@ -15,7 +14,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  declarations: [ListComponent, CreateComponent],
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule, ListComponent, CreateComponent]
 })
 export class Feature1RoutingModule { }
